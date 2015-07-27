@@ -1688,6 +1688,7 @@ XML_ParseBuffer(XML_Parser parser, int len, int isFinal)
 void * XMLCALL
 XML_GetBuffer(XML_Parser parser, int len)
 {
+  int keep = 0;
   if (len < 0) {
     errorCode = XML_ERROR_NO_MEMORY;
     return NULL;
@@ -1709,7 +1710,7 @@ XML_GetBuffer(XML_Parser parser, int len)
       return NULL;
     }
 #ifdef XML_CONTEXT_BYTES
-    int keep = (int)(bufferPtr - buffer);
+    keep = (int)(bufferPtr - buffer);
 
     if (keep > XML_CONTEXT_BYTES)
       keep = XML_CONTEXT_BYTES;
